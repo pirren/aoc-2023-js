@@ -1,13 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import { getLines } from '../../lib/utils.js';
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
+const lines = getLines(import.meta.url);
 
-const filePath = path.join(__dirname.slice(1), 'input.txt'); 
-const lines = fs.readFileSync(filePath, 'utf-8').trim().split('\r\n');
-
-function partOne() {
+export function partOne() {
     const max = { "red" : 12 , "green" : 13, "blue" : 14 };
     return lines.reduce((acc, line) => {
         let gameId = +line.split(':')[0].split(' ')[1];
@@ -26,7 +21,7 @@ function partOne() {
     }, 0);
 }
 
-function partTwo() {
+export function partTwo() {
     return lines.reduce((acc, line) => {
         const seen = { "red" : 0 , "green" : 0, "blue" : 0 };
         line.split(':')[1].split('; ').forEach(game => {
@@ -41,6 +36,3 @@ function partTwo() {
         return acc + seen["red"] * seen["green"] * seen["blue"];
     }, 0);
 }
-
-export { partOne };
-export { partTwo };

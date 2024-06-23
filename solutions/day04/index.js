@@ -1,11 +1,6 @@
-import fs from 'fs';
-import path from 'path';
+import { getLines } from '../../lib/utils.js';
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
-
-const filePath = path.join(__dirname.slice(1), 'input.txt'); 
-const lines = fs.readFileSync(filePath, 'utf-8').trim().split('\r\n');
+const lines = getLines(import.meta.url);
 
 function toNumbers(values) {
     return values.split(' ').filter(x => x != '').map(x => parseInt(x.trim()));
@@ -15,7 +10,7 @@ function getDict() {
     return [...Array(lines.length).keys()].map(x => x = 1);
 }
 
-function partOne() {
+export function partOne() {
     return lines.map((x) => {
         const [winners, numbers] = x.split(':')[1].split('|').map(toNumbers);
         return winners.filter(x => numbers.includes(x));
@@ -26,7 +21,7 @@ function partOne() {
     }, 0);
 }
 
-function partTwo() {
+export function partTwo() {
     const dict = getDict();
 
     const numbers = lines.map((x, i) => {
@@ -42,6 +37,3 @@ function partTwo() {
 
     return dict.reduce((acc, x) => acc + x, 0);
 }
-
-export { partOne };
-export { partTwo };

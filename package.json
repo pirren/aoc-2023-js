@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "mocha day*/test.js"
+    "test": "mocha solutions/day*/test.js"
   },
   "keywords": [],
   "author": "",

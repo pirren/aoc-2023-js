@@ -1,13 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import { getLines } from '../../lib/utils.js';
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
+const lines = getLines(import.meta.url);
 
-const filePath = path.join(__dirname.slice(1), 'input.txt');
-const lines = fs.readFileSync(filePath, 'utf-8').trim().split('\r\n');
-
-function partOne() {
+export function partOne() {
     return lines.reduce((acc, line) => {
         let first = line.split('').find(n => !Number.isNaN(+n));
         let last = line.split('').reverse().find(n => !Number.isNaN(+n));
@@ -15,7 +10,7 @@ function partOne() {
     }, 0);
 }
 
-function partTwo() {
+export function partTwo() {
     const letters = {"one": "on1e", "two": "tw2o", "three": "thr3ee", "four": "fo4ur", "five": 
     "fi5ve", "six": "si6x", "seven": "se7ven", "eight": "ei8ght", "nine": "ni9ne" };
 
@@ -31,5 +26,5 @@ function partTwo() {
     }, 1);
 }
 
-export { partOne };
-export { partTwo };
+// export { partOne };
+// export { partTwo };

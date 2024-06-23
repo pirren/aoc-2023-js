@@ -1,13 +1,8 @@
-import fs from 'fs';
-import path from 'path';
+import { getLines } from '../../lib/utils.js';
 
-const __filename = new URL(import.meta.url).pathname;
-const __dirname = path.dirname(__filename);
+const lines = getLines(import.meta.url);
 
-const filePath = path.join(__dirname.slice(1), 'input.txt'); 
-const lines = fs.readFileSync(filePath, 'utf-8').trim().split('\r\n');
-
-function partOne() {
+export function partOne() {
     return lines.reduce((acc, line) => {
         const isCellValid = (x, y) => 
             y >= 0 && y < lines.length && x >= 0 && x < lines[0].length && Number.isNaN(+lines[y][x]) && lines[y][x] != '.';
@@ -34,7 +29,7 @@ function partOne() {
     }, 0);
 }
 
-function partTwo() {
+export function partTwo() {
     // Scan once for numbers
     const numbers = lines.reduce((acc, line) => {
         let match;
@@ -71,6 +66,3 @@ function partTwo() {
         return acc; 
     }, []).reduce((a,b) => a + b, 0);
 }
-
-export { partOne };
-export { partTwo };
